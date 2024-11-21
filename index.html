@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/reset.css" />
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="shortcut icon" href="favicon.gif" type="image/x-icon" />
+    <title>카카오뱅크 인재영입</title>
+  </head>
+  <body>
+    <div id="main-img-wrapper">
+      <img width="320" src="./img/02-img-hands.49cd2bd35e71288bc5d65f7c7fd43ed9.png" />
+    </div>
+    <div id="intro-main">
+      <p>이미 모두의 은행 카카오뱅크,</p>
+      <p>함께 일해요.</p>
+      <p id="join-us-text">Join us!</p>
+      <img id="down-arrow-icon" src="./img/02-arrow-56.2fa858a30b7a3ffc9a30eccc26a6e164.svg" />
+    </div>
+    <ul id="list-item-wrapper">
+      <li class="list-item">26주적금</li>
+      <li class="list-item">저금통</li>
+      <li class="list-item">비상금대출</li>
+      <li class="list-item">입출금통장</li>
+      <li class="list-item">세이프박스</li>
+      <li class="list-item">자유적금</li>
+      <li class="list-item">정기예금</li>
+      <li class="list-item">내신용정보</li>
+      <li class="list-item">실험실</li>
+      <li class="list-item">마이너스통장대출</li>
+      <li class="list-item">휴면예금/보험금찾기</li>
+      <li class="list-item">개인사업자대출</li>
+      <li class="list-item">해외송금받기</li>
+      <li class="list-item">인증</li>
+      <li class="list-item">간편이체</li>
+      <li class="list-item">전월세보증금대출</li>
+      <li class="list-item">프렌즈체크카드</li>
+      <li class="list-item">모임통장</li>
+      <li class="list-item">카카오뱅크mini</li>
+      <li class="list-item">신용대출</li>
+      <li class="list-item">증권사주식계좌</li>
+      <li class="list-item">제휴신용카드</li>
+      <li class="list-item">연계대출</li>
+      <li class="list-item">개인사업자뱅킹</li>
+      <li class="list-item">기록통장</li>
+      <li class="list-item">개인금고</li>
+      <li class="list-item">혜택좋은신용카드</li>
+      <li class="list-item">중고차구매대출</li>
+      <li class="list-item">쿠폰사고팔기</li>
+      <li class="list-item">한달적금</li>
+      <li class="list-item">신용대출비교하기</li>
+    </ul>
+  </body>
+
+  <script>
+    const listStyleChangeStartY = 373;
+    const listStyleChangeEndY = 1585;
+    const listItems = document.querySelectorAll(".list-item"); // 31개
+
+    const division = (listStyleChangeEndY - listStyleChangeStartY) / listItems.length; // 39.096..
+
+    // 스크롤 이벤트 (on 스타일)
+    window.addEventListener("scroll", () => {
+      if (document.getElementById("on")) {
+        document.getElementById("on").removeAttribute("id");
+      }
+
+      if (window.scrollY > listStyleChangeStartY && window.screenY < listStyleChangeEndY) {
+        const targetIndex = Math.round((window.scrollY - listStyleChangeStartY) / division);
+
+        if (listItems[targetIndex]) {
+          listItems[targetIndex].id = "on";
+        }
+      }
+    });
+  </script>
+</html>
