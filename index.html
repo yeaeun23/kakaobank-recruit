@@ -51,17 +51,25 @@
       <li class="list-item">한달적금</li>
       <li class="list-item">신용대출비교하기</li>
     </ul>
+    <main>
+      <section id="panel1-img">
+        <img id="ryan-image" src="./img/03-img-ryan.5d2862452730274c1b0bed7dc8fde575.png" />
+      </section>
+    </main>
   </body>
 
   <script>
     const listStyleChangeStartY = 373;
     const listStyleChangeEndY = 1585;
     const listItems = document.querySelectorAll(".list-item"); // 31개
-
     const division = (listStyleChangeEndY - listStyleChangeStartY) / listItems.length; // 39.096..
 
-    // 스크롤 이벤트 (on 스타일)
+    const panel1Img = document.getElementById("panel1-img");
+    const ryanImage = document.getElementById("ryan-image");
+
+    // 스크롤 이벤트
     window.addEventListener("scroll", () => {
+      // 리스트 on 스타일
       if (document.getElementById("on")) {
         document.getElementById("on").removeAttribute("id");
       }
@@ -72,6 +80,21 @@
         if (listItems[targetIndex]) {
           listItems[targetIndex].id = "on";
         }
+      }
+
+      // 라이언 이미지 회전
+      const scrollYBottom = window.scrollY + document.documentElement.clientHeight;
+
+      if (
+        scrollYBottom > panel1Img.offsetTop &&
+        scrollYBottom < panel1Img.offsetTop + panel1Img.offsetHeight + 100
+      ) {
+        const ratio = (scrollYBottom - panel1Img.offsetTop) / (panel1Img.offsetHeight + 100);
+        const translateX = 80 - 80 * 1.3 * ratio;
+        const translateY = -13 + 13 * ratio;
+        const rotaionDegree = 23 - 23 * 1.7 * ratio;
+
+        ryanImage.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotaionDegree}deg)`;
       }
     });
   </script>
