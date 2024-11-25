@@ -59,10 +59,19 @@
   </body>
 
   <script>
-    const listStyleChangeStartY = 373;
-    const listStyleChangeEndY = 1585;
+    const listItemWrapper = document.getElementById("list-item-wrapper");
     const listItems = document.querySelectorAll(".list-item"); // 31개
-    const division = (listStyleChangeEndY - listStyleChangeStartY) / listItems.length; // 39.096..
+
+    let listStyleChangeStartY = listItemWrapper.offsetTop - 550;
+    let listStyleChangeEndY = listItemWrapper.offsetTop + listItemWrapper.offsetHeight - 550;
+    let division = (listStyleChangeEndY - listStyleChangeStartY) / listItems.length;
+
+    // 화면 리사이즈 이벤트 (반응형)
+    window.addEventListener("resize", () => {
+      listStyleChangeStartY = listItemWrapper.offsetTop - 550;
+      listStyleChangeEndY = listItemWrapper.offsetTop + listItemWrapper.offsetHeight - 550;
+      division = (listStyleChangeEndY - listStyleChangeStartY) / listItems.length;
+    });
 
     const panel1Img = document.getElementById("panel1-img");
     const ryanImage = document.getElementById("ryan-image");
