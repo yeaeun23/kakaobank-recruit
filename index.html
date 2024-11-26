@@ -53,7 +53,18 @@
     </ul>
     <main>
       <section id="panel1-img">
-        <img id="ryan-image" src="./img/03-img-ryan.5d2862452730274c1b0bed7dc8fde575.png" />
+        <img id="ryan-img" src="./img/03-img-ryan.5d2862452730274c1b0bed7dc8fde575.png" />
+      </section>
+      <section id="video-section">
+        <div id="fixed-wrapper">
+          <video
+            id="video"
+            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+            type="video/mp4"
+            muted
+            loop
+          ></video>
+        </div>
       </section>
     </main>
   </body>
@@ -74,7 +85,16 @@
     });
 
     const panel1Img = document.getElementById("panel1-img");
-    const ryanImage = document.getElementById("ryan-image");
+    const ryanImg = document.getElementById("ryan-img");
+
+    const videoSection = document.getElementById("video-section");
+    const fixedWrapper = document.getElementById("fixed-wrapper");
+    const video = document.getElementById("video");
+    const videoPlayBack = 500;
+
+    //video.addEventListener("loadedmetadata", () => {
+    videoSection.style.height = video.duration * videoPlayBack + "px";
+    //});
 
     // 스크롤 이벤트
     window.addEventListener("scroll", () => {
@@ -103,7 +123,49 @@
         const translateY = -13 + 13 * ratio;
         const rotaionDegree = 23 - 23 * 1.7 * ratio;
 
-        ryanImage.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotaionDegree}deg)`;
+        ryanImg.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotaionDegree}deg)`;
+      }
+
+      // 비디오 고정
+      function centerElement(elementId) {
+        const element = document.getElementById(elementId);
+        const parent = element.parentElement;
+
+        // 요소가 화면 중간일 때
+        if (
+          window.scrollY >
+          parent.offsetTop - (document.documentElement.clientHeight - element.offsetHeight) / 2
+        ) {
+          // 화면 가운데로 위치 고정
+          element.style.position = "fixed";
+          element.style.top = "50%";
+          element.style.left = "50%";
+          element.style.transform = "translate(-50%,-50%)";
+        } else {
+          // 되돌리기
+          element.style.position = "relative";
+          element.style.top = "initial";
+          element.style.left = "initial";
+          element.style.transform = "initial";
+        }
+      }
+
+      centerElement("fixed-wrapper");
+
+      if (
+        window.scrollY >
+        videoSection.offsetTop +
+          videoSection.offsetHeight -
+          fixedWrapper.offsetHeight -
+          (document.documentElement.clientHeight - fixedWrapper.offsetHeight) / 2
+      ) {
+        // 되돌리기
+        fixedWrapper.style.position = "relative";
+        fixedWrapper.style.top = "initial";
+        fixedWrapper.style.left = "initial";
+        fixedWrapper.style.transform = `translateY(${
+          videoSection.offsetHeight - fixedWrapper.offsetHeight
+        }px)`;
       }
     });
   </script>
