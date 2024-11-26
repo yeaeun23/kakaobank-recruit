@@ -127,7 +127,7 @@
       }
 
       // 비디오 고정
-      function centerElement(elementId) {
+      function centerElement(elementId, video) {
         const element = document.getElementById(elementId);
         const parent = element.parentElement;
 
@@ -136,11 +136,16 @@
           window.scrollY >
           parent.offsetTop - (document.documentElement.clientHeight - element.offsetHeight) / 2
         ) {
-          // 화면 가운데로 위치 고정
+          // 비디오 위치 화면 가운데로 고정
           element.style.position = "fixed";
           element.style.top = "50%";
           element.style.left = "50%";
           element.style.transform = "translate(-50%,-50%)";
+
+          // 비디오 재생
+          if (video) {
+            video.currentTime = (window.scrollY - videoSection.offsetTop) / videoPlayBack;
+          }
         } else {
           // 되돌리기
           element.style.position = "relative";
@@ -150,7 +155,7 @@
         }
       }
 
-      centerElement("fixed-wrapper");
+      centerElement("fixed-wrapper", video);
 
       if (
         window.scrollY >
