@@ -57,13 +57,10 @@
       </section>
       <section id="video-section">
         <div id="fixed-wrapper">
-          <video
-            id="video"
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-            type="video/mp4"
-            muted
-            loop
-          ></video>
+          <video id="video" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" muted loop></video>
+          <div id="fixed-description">
+            <img src="./img/invalid-tit.webp" alt="혁신이 만든 압도적인 성장" />
+          </div>
         </div>
       </section>
     </main>
@@ -96,6 +93,10 @@
     videoSection.style.height = video.duration * videoPlayBack + "px";
     //});
 
+    const fixedDescription = document.getElementById("fixed-description");
+    const fixedDescriptionAppearTiming = 3700;
+    const fixedDescriptionAppearEnds = 3800;
+
     // 스크롤 이벤트
     window.addEventListener("scroll", () => {
       // 리스트 on 스타일
@@ -114,10 +115,7 @@
       // 라이언 이미지 회전
       const scrollYBottom = window.scrollY + document.documentElement.clientHeight;
 
-      if (
-        scrollYBottom > panel1Img.offsetTop &&
-        scrollYBottom < panel1Img.offsetTop + panel1Img.offsetHeight + 100
-      ) {
+      if (scrollYBottom > panel1Img.offsetTop && scrollYBottom < panel1Img.offsetTop + panel1Img.offsetHeight + 100) {
         const ratio = (scrollYBottom - panel1Img.offsetTop) / (panel1Img.offsetHeight + 100);
         const translateX = 80 - 80 * 1.3 * ratio;
         const translateY = -13 + 13 * ratio;
@@ -132,10 +130,7 @@
         const parent = element.parentElement;
 
         // 요소가 화면 중간일 때
-        if (
-          window.scrollY >
-          parent.offsetTop - (document.documentElement.clientHeight - element.offsetHeight) / 2
-        ) {
+        if (window.scrollY > parent.offsetTop - (document.documentElement.clientHeight - element.offsetHeight) / 2) {
           // 비디오 위치 화면 가운데로 고정
           element.style.position = "fixed";
           element.style.top = "50%";
@@ -157,20 +152,24 @@
 
       centerElement("fixed-wrapper", video);
 
-      if (
-        window.scrollY >
-        videoSection.offsetTop +
-          videoSection.offsetHeight -
-          fixedWrapper.offsetHeight -
-          (document.documentElement.clientHeight - fixedWrapper.offsetHeight) / 2
-      ) {
+      if (window.scrollY > videoSection.offsetTop + videoSection.offsetHeight - fixedWrapper.offsetHeight - (document.documentElement.clientHeight - fixedWrapper.offsetHeight) / 2) {
         // 되돌리기
         fixedWrapper.style.position = "relative";
         fixedWrapper.style.top = "initial";
         fixedWrapper.style.left = "initial";
-        fixedWrapper.style.transform = `translateY(${
-          videoSection.offsetHeight - fixedWrapper.offsetHeight
-        }px)`;
+        fixedWrapper.style.transform = `translateY(${videoSection.offsetHeight - fixedWrapper.offsetHeight}px)`;
+      }
+
+      // 텍스트 이미지 올라오는 효과
+      if (window.scrollY > fixedDescriptionAppearTiming && window.scrollY < fixedDescriptionAppearEnds) {
+        fixedDescription.style.transform = `translateY(${fixedDescriptionAppearEnds - window.scrollY}px)`;
+        fixedDescription.style.opacity = (window.scrollY - fixedDescriptionAppearTiming) / 300;
+      } else if (window.scrollY > fixedDescriptionAppearEnds) {
+        fixedDescription.style.transform = `translateY(0px)`;
+        fixedDescription.style.opacity = 1;
+      } else {
+        fixedDescription.style.transform = `translateY(50px)`;
+        fixedDescription.style.opacity = 0;
       }
     });
   </script>
