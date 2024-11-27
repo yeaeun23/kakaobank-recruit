@@ -341,7 +341,7 @@ body {
 
 #video-section {
   margin-bottom: 500px;
-  background-color: #333;
+  background-color: #222;
 }
 
 #video {
@@ -356,4 +356,20 @@ body {
   text-align: right;
   transform: translateY(50px);
   opacity: 0;
+}
+
+#bank-beyond-wrapper {
+  height: 380px;
+}
+
+#bank-beyond {
+  display: flex;
+  justify-content: center;
+}
+
+#white-wrapper {
+  position: relative;
+  background-color: #f7f7f7;
+  height: 1000px;
+  z-index: 10000;
 }

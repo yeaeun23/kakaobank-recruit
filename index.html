@@ -63,6 +63,12 @@
           </div>
         </div>
       </section>
+      <div id="bank-beyond-wrapper">
+        <div id="bank-beyond">
+          <img width="315" src="./img/05-text.webp" alt="Bank, Beyond Bank" />
+        </div>
+      </div>
+      <div id="white-wrapper"></div>
     </main>
   </body>
 
@@ -124,7 +130,6 @@
         ryanImg.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotaionDegree}deg)`;
       }
 
-      // 비디오 고정
       function centerElement(elementId, video) {
         const element = document.getElementById(elementId);
         const parent = element.parentElement;
@@ -171,6 +176,8 @@
         fixedDescription.style.transform = `translateY(50px)`;
         fixedDescription.style.opacity = 0;
       }
+
+      centerElement("bank-beyond");
     });
   </script>
 </html>
