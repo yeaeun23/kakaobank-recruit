@@ -109,9 +109,9 @@
     const video = document.getElementById("video");
     const videoPlayBack = 500;
 
-    // video.addEventListener("loadedmetadata", () => {
-    videoSection.style.height = video.duration * videoPlayBack + "px";
-    // });
+    video.addEventListener("loadedmetadata", () => {
+      videoSection.style.height = video.duration * videoPlayBack + "px";
+    });
 
     const fixedDescription = document.getElementById("fixed-description");
     const fixedDescriptionAppearTiming = 3700;
